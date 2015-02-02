@@ -1,0 +1,37 @@
+extend layout
+extend layout
+block left-section
+  p
+    | &nbsp
+block content
+  if noAlbum
+    | Sorry, you don't have any album yet. Create one:
+    br
+    br
+    //- need to change action!
+    form(method='get', action='/create_trip')
+      input(type='submit', value='Create A New Album')
+  else
+    form(method='post', action='/add_content_check')
+      //- input(type='hidden', name='_method', value='put')
+      p URL*:&nbsp&nbsp
+          input(type='text', name='url', value='')
+      p Type*:&nbsp&nbsp
+        input(type='radio', name='Type', value='photo', checked=true)
+        | Photo&nbsp&nbsp   
+        input(type='radio', name='Type', value='video', checked=false)
+        | Video
+        br
+      p Select An Album*:
+        br
+        - each album, i in albums
+          input(type='radio', name='Album', value="#{album.ID}")
+          | #{album.NAME}
+          br
+        br
+        | #{message}
+        br
+        input(type='submit', value='Finish')
+        br
+    form(method='get', action='/homepage')
+      input(type='submit', value='Cancel')

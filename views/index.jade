@@ -1,0 +1,28 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block left-section
+  p
+    | &nbsp
+
+block content
+  p
+    | Please log in first:
+    form(method='post', action='/login') 
+      label Username: 
+      input(name='username', value='', placeholder='username')
+      br
+      br
+      label Password:  
+      input(type='password', name='password', value='', placeholder='password')
+      br
+      br
+      input(type='submit', value='Sign In')
+    br
+    a(href="/signup") Not a user? Resigter now!
+  
+  p(style='color:red') #{message}
+      

@@ -1,0 +1,49 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block content
+  p
+    | New User Registration:
+    form(method='post', action='/register') 
+      label Username*: 
+      input(name='username', value='')
+      br
+      br
+      label Email*: 
+      input(name='email', value='')
+      br
+      br
+      label Password*:  
+      input(type='password', name='password', value='')
+      br
+      br
+      label Full Name: 
+      input(name='name', value='')
+      br
+      br
+      label Gender: 
+      input(name='gender', value='')
+      br
+      br
+      label Affiliation: 
+      input(name='affiliation', value='')
+      br
+      br
+      label Interests: 
+      input(name='interests', value='')
+      br
+      br
+      label Portrait Image: 
+      input(name='portrait', value='')
+      br
+      br
+      input(type='submit', value='Sign Up')
+      br
+
+    form(method='get', action='/')
+      input(type='submit', value='Cancel')
+    
+    p(style='color:red')  #{message}

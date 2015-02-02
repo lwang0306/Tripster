@@ -1,0 +1,75 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block left-section
+	ul Users who joined the trip
+		each friend in friends
+			li: a(href="/other_user?other=#{friend.FRIEND}") #{friend.FRIEND}
+
+	br
+
+	if cstatus == 1
+		form(method='post', action='/invite')
+			input(type='submit', value='Invite more friends')
+
+block content
+	p1
+	| location: 
+	a(href="/glocation?location=#{location}") #{location} <br/>
+	| trip creator: 
+	a(href="/") #{creator} <br/>
+	| average score: #{score} <br/>
+	| feature: #{feature} <br/>
+
+	br
+	br
+
+	if rstatus == 0  
+		| Rate the trip <br/>
+		form(method='post', action='/rate') 
+			label Rate: 
+			input(name='rate', value='', placeholder='1 - 10') 
+			br
+			label Comment: 
+			input(name='comment', value='', placeholder='Comment the trip')
+			br
+			input(type='submit', value='Submit')
+	else if rstatus == 1  
+		| Thank you. You have rated and commented this trip. <br/>
+	else if rstatus == 2
+		| The trip status is pending now. <br/>
+	else
+		if cstatus == 1
+			| You are the creator of this trip.
+			| Rate the trip <br/>
+			form(method='post', action='/rate') 
+				label Rate: 
+				input(name='rate', value='', placeholder='1 - 10') 
+				br
+				label Comment: 
+				input(name='comment', value='', placeholder='Comment the trip')
+				br
+				input(type='submit', value='Submit')
+		else
+			| You can apply for this trip now. <br/>
+			form(method='post', action='/applytrip?tripid=#{tripid}') 
+				input(type='submit', value='Apply now!')
+
+	form(method='get', action='/trip')
+		input(type='submit', value='Return to My Trip')
+
+block sidebar
+	ul Trip albums
+		each album in albums
+			li: a(href="/displayContentInAlbum?albumId=#{album.ALBUMID}") #{album.ALBUMNAME}
+
+	br
+
+	if cstatus == 1
+		form(method='post', action='/user/createAlbum')
+			input(type='submit', value='Create a new album')
+
+

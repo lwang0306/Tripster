@@ -1,0 +1,29 @@
+// Jade file to specify output new friend searching result
+// Inherits from layout
+extend layout
+block left-section
+  p
+    | &nbsp
+block content
+  p
+    | #{message}
+    br
+
+  if showButton
+    p
+      a(href='/other_user?other=#{result}') #{result}
+    form(method='get', action='/friend_request_sent')
+      button(type='submit', name='targetUsername', value='#{result}') Send Friend Request
+
+  if alreadyFriends
+    p
+      a(href='/other_user?other=#{friend}') #{friend}
+  
+  br
+
+  form(method='get', action='/homepage')
+    input(type='submit', value='Back to Homepage')
+
+  br
+  form(method='get', action='/my_friends')
+    input(type='submit', value='My Friends')

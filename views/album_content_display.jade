@@ -1,0 +1,20 @@
+// Jade file to specify output of an actors list
+// Inherits from layout
+// data from displayContentInAlbum.js, will pass to like.js
+extend layout
+
+// ******************left-section********************
+block content
+  // image of the content
+  each result in results 
+    if result.TYPE == 'video'
+      img(src='http://www.realestatemarketingblog.org/wp-content/uploads/2012/09/viral-real-estate-video.png', width='200', height='auto')
+    else
+      img(src='#{result.CONTENTURL}', width='200', height='auto')  
+    br
+    a(href='/like?contentId=#{result.CONTENT_ID}') like
+    &nbsp;&nbsp;#{result.LIKES_COUNT}
+    &nbsp;&nbsp;&nbsp;
+    form(method='post', action='/content')
+      button(type='submit', name='contentId', value='#{result.CONTENT_ID}') comment
+    

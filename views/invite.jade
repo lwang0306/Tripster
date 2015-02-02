@@ -1,0 +1,27 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block left-section
+  p  
+    | &nbsp
+
+block content
+  p
+    | Check out who you can invite!
+    br
+    br
+    - each friend, i in friends
+      li
+       a(href='other_user?other=#{friend.USERNAME2}') #{friend.USERNAME2}
+       form(method='post', action='/invite_done')
+         input(type='submit', name='invite' + i, value='invite')
+      br
+    br
+
+  p(style='color:red') #{message2}
+
+  form(method='get', action='/homepage')
+      input(type='submit', value='Return')

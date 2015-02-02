@@ -1,0 +1,63 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+
+block left-section
+  form(method='get', action='/displayContentInAlbum')
+    button(type='submit', name='albumId', value='#{album_id}') Back to Album
+    | &nbsp&nbsp
+    | Viewed: #{times} times
+  br
+  if is_video
+    iframe(width='600', height='493', src='#{url}')
+  else
+    if times > 10
+      img(src='/images/' + '#{contentId}' + '.jpg', width='600', height='auto')
+    else
+      img(src='#{url}', width='600', height='auto')
+  br
+
+  p
+    | Average Rate: #{avg_rate}
+    if !is_rated
+      form(method='post', action='/rate_content') (0~5)
+        input(type='text', name='new_rate')
+        button(type='submit', name='contentId', value='#{contentId}') Rate it!
+    else
+      br
+      | You already rated.
+    br
+    | #{rate_message}
+    
+  p
+    | Comments:
+    br
+    - each comment in comments
+      a(href='/other_user?other=#{comment.USERNAME}') #{comment.USERNAME}
+      | &nbsp:
+      br
+      | "#{comment.COMMENTS}"
+      br
+      br
+
+block content
+  p
+    | &nbsp
+
+block sidebar
+  p
+    if !is_commented
+      | Comment:
+      br
+      form(method='post', action='/comment_content')
+        input(type='text', name='new_comment', maxlength='200')
+        br
+        br
+        button(type='submit', name='contentId', value='#{contentId}') Submit
+        br
+        | #{comment_message}
+        br
+    else
+      | You already commented.
+    form(method='get', action='/homepage')
+      button(type='submit') Back to Homepage

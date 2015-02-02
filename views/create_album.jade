@@ -1,0 +1,28 @@
+extend layout
+block content
+  h1#title Create A New Album:
+    br
+    br
+    form(method='get', action='/album')
+      input(type='hidden', name='_method', value='put')
+      p Album Name*: &nbsp;
+          input(type='text', name='album_name', { required:true })
+      p Select A Trip*:
+        ul
+          - each result in results
+            input(type='radio', name='RadioGroup1', value='#{result.NAME}', { required:true }) 
+            li #{result.NAME}
+      p Privacy*: 
+        br
+        input(type='radio', name='RadioGroup2', value='private', checked=false)
+        | Private
+        br
+        input(type='radio', name='RadioGroup2', value='share', checked=true)
+        | Share between trip members
+        br
+        input(type='radio', name='RadioGroup2', value='public', checked=false)
+        | Public
+        br
+        br
+        input(type='submit', value='Finish')
+        //input(type='submit', value='Cancel')

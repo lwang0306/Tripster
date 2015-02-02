@@ -1,0 +1,35 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block left-section
+	ul2 Yelp recommended food
+		each f in food.businesses
+			li
+				a(href="#{f.url}") #{f.name}
+				br
+				img(src= "#{f.image_url}")
+				br
+				img(src= "#{f.rating_img_url}")
+
+block content
+	ul
+		each result in results
+			li 
+				a(href="/atrip?tripname=#{result.NAME}&time=#{result.TIME}") #{result.NAME}
+				br
+				br
+	form(method="get", action='/homepage')
+		input(type='submit', value='Return')
+
+block sidebar
+	ul3 Yelp recommended hotel
+		each h in hotel.businesses
+			li
+				a(href="#{h.url}") #{h.name}
+				br
+				img(src="#{h.image_url}")
+				br
+				img(src="#{h.rating_img_url}")

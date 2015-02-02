@@ -1,0 +1,11 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block content
+  p(style='color:blue')
+    | #{message}
+  form(method='get', action='/homepage')
+      input(type='submit', value='Return')

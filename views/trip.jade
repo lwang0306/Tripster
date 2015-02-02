@@ -1,0 +1,30 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block left-section
+	P
+		| &nbsp
+
+block content
+	ul1 Past Trips <br/>
+		each result in results1
+			li1: a(href="/atrip?tripname=#{result.NAME}&status=accepted&time=past", title=result.STATUS) #{result.NAME} <br/>
+
+	br
+	br
+
+	ul2 Future Trips <br/>
+		each result in results2
+			li2: a(href="/atrip?tripname=#{result.NAME}&status=accepted&time=future", title=result.STATUS) #{result.NAME} <br/>
+
+	br
+	br
+
+	form(method='get', action='/createtrip')
+		input(type='submit', value='Create a Trip')
+
+	form(method="get", action='/homepage')
+		input(type='submit', value='Return')

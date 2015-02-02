@@ -1,0 +1,16 @@
+// Jade file to specify output of an actors list
+// Inherits from layout
+// data from displayContentInAlbum.js, will pass to like.js
+extend layout
+
+// ******************left-section********************
+block content
+  // image of the content
+  each result in results 
+    img(src='#{result.CONTENTURL}', width='200', height='auto')  
+    br
+    a(href='/like?contentId=#{result.CONTENT_ID}') like
+    &nbsp;&nbsp;#{count}
+    &nbsp;&nbsp;&nbsp;
+    a(href='/content?contentId=#{result.CONTENT_ID}') comment
+    

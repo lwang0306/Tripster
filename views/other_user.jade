@@ -1,0 +1,59 @@
+// Jade file to specify output of an actors list
+// Inherits from layout
+extend layout
+
+// ******************left-section********************
+block left-section
+  // image of the user
+  if isFriend
+    img(src='#{user.PORTRAIT}', width='150', height='120')
+  else
+    img(src='http://www.bonniercorp.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png', width='150', height='120')
+  br
+  // link to user homepage
+  a(href="/other_user?other=#{username}") #{username}
+  br
+  br
+
+  // search for a new friend
+  form(method='get', action='/search_new_friend')
+    input(name='newfriend', value='', placeholder='Search for a new Friend?')
+    input(type='submit', value='Go!')
+    br
+    br
+
+// ******************middle-section********************
+block content
+  p.
+  
+  if !isFriend
+    | The user's profile is not visible to you.
+    br
+    br
+    br
+    form(method='get', action='/friend_request_sent')
+      button(type='submit', name='targetUsername', value='#{username}') Send Friend Request
+
+  else
+    | Name: #{user.NAME}
+    br
+    br
+    | Email: 
+    a(href='mailto:#{user.EMAIL}') #{user.EMAIL}
+    br
+    br
+    | Interests: #{user.INTERESTS}
+    br
+    br
+    | Affiliation: #{user.AFFILIATION}
+    br
+    br
+    | Gender: #{user.GENDER}
+
+  form(method='get', action='/homepage')
+    input(type='submit', value='Return to Homepage')
+    
+
+// ******************right-section********************
+block sidebar
+

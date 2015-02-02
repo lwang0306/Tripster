@@ -1,0 +1,94 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+
+// ******************left-section********************
+block left-section
+  p(style='font-size:200%') Trip Invitation
+  br
+
+  ul
+    each inviter, i in inviters
+      li
+        a(href='/other_user?other=#{inviter.USERNAME}') #{inviter.USERNAME} 
+        |  invited you to join the trip 
+        a(href='/atrip?tripname=#{inviter.NAME}&time=#{inviter.TIME}') #{inviter.NAME} 
+        form(name='myform', method='post', action='/confirm')
+          input(type='submit', name='invitation' + i, value= 'accepted')
+          input(type='submit', name='invitation' + i, value='denied')
+          br
+          br
+    each invitee, i in invitees
+      li
+        a(href='/other_user?other=#{invitee.USERNAME}') #{invitee.USERNAME}
+        |  has #{invitee.STATUS} your invitation to trip  
+        a(href='/atrip?tripname=#{invitee.NAME}&time=#{invitee.TIME}') #{invitee.NAME}
+      form(name='myform', method='post', action='/confirm')
+        input(type='submit', name='invmes' + i, value='OK, I know')
+      br
+      br
+
+// ******************middle-section********************
+block content
+  p(style='font-size:200%') Trip Request
+  br
+
+  ul
+    each request, i in requested
+      li
+        a(href='/other_user?other=#{request.USERNAME}') #{request.USERNAME}
+        |  requested to join your trip 
+        a(href='/atrip?tripname=#{request.NAME}&time=#{request.TIME}') #{request.NAME}
+        form(method='post', action='/confirm')
+          input(type='submit', name='trequested' + i, value='accepted')
+          input(type='submit', name='trequested' + i, value='denied')
+          br
+          br
+    each request, i in requests
+      li
+        a(href='/other_user?other=#{request.USERNAME}') #{request.USERNAME}
+        |  has #{request.STATUS} your request to join trip 
+        a(href='/atrip?tripname=#{request.NAME}&time=#{request.TIME}') #{request.NAME}
+      form(name='myform', method='post', action='/confirm')
+        input(type='submit', name='trequest' + i, value='OK, I know')
+      br
+      br
+  br
+  br
+
+  form(method='get', action='/homepage')
+    input(type='submit', value='Return to Homepage', style="height:100px;width:150px;font-size:150%")
+
+// ******************right-section********************
+block sidebar
+  p(style='font-size:200%') Friend Status
+  br
+
+  ul
+    each request, i in frequested
+      li
+        a(href='/other_user?other=#{request.USERNAME1}') #{request.USERNAME1}
+        |  sent you a friend request
+        form(method='post', action='/confirm')
+          input(type='submit', name='frequested' + i, value='accepted')
+          input(type='submit', name='frequested' + i, value='denied')
+          br
+          br 
+     each request, i in frequests
+      li
+        a(href='/other_user?other=#{request.USERNAME2}') #{request.USERNAME2}
+        |  has #{request.STATUS} your request to be friends
+        form(name='myform', method='post', action='/confirm')
+          input(type='submit', name='frequest' + i, value='OK, I know')
+      br
+      br
+
+
+
+
+
+
+

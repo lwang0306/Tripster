@@ -1,0 +1,36 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block content
+  p
+    | Please Edit Your Profile:
+    form(method='post', action='/edit_done') 
+      label Email*: 
+      input(name='email', value=email)
+      br
+      br
+      label Password*:  
+      input(type='password', name='password', value=password)
+      br
+      br
+      label Full Name: 
+      input(name='name', value=name)
+      br
+      br
+      label Affiliation: 
+      input(name='affiliation', value=affiliation)
+      br
+      br
+      label interests: 
+      input(name='interests', value=interests)
+      br
+      br
+      input(type='submit', value='Confirm')
+      br
+    form(method='get', action='/homepage')
+      input(type='submit', value='Cancel')
+    
+    p(style='color:red') #{message}

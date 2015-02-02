@@ -1,0 +1,45 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block left-section
+  p 
+    | &nbsp
+
+block content
+  p
+    | Create a new trip:
+    form(method='post', action='/newtrip') 
+      label Tripname*: 
+      input(name='tripname', value='')
+      br
+      br
+      label Feature: 
+      input(name='feature', value='')
+      br
+      br
+      label Location: 
+      input(name='location', value='')
+      br
+      br
+      label Privacy Flag*: 
+      br
+      input(type='radio', name='privacyflag', value='public', checked)
+      | public
+      br
+      input(type='radio', name='privacyflag', value='sharedWithTripMembers')
+      | sharedWithTripMembers
+      br
+      input(type='radio', name='privacyflag', value='private')
+      | private
+      br
+      br
+      input(type='submit', value='Create')
+      br
+    form(method='get', action='/trip')
+      input(type='submit', value='Cancel')
+    
+  h1.
+      #{message}

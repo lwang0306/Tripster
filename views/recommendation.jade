@@ -1,0 +1,39 @@
+// Basic Jade specification for querying for an user
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /user once
+// the user hits Submit
+
+block left-section
+  ul1 Recommended Trips <br/></br></br>
+    each result in results
+      li1
+        a(href="/atrip?tripname=#{result.NAME}&time=future") #{result.NAME} <br/></br>
+
+
+block content
+  p
+    | Friends of your friends:
+    br
+    br
+    - each user in friendsfriend
+      li
+        a(href='other_user?other=#{user.USERNAME}') #{user.USERNAME}
+      br
+    br
+    br
+    br
+
+  form(method='get', action='/homepage')
+    input(type='submit', value='Return to Homepage')
+
+
+block sidebar
+  p
+    | Users with same interests:
+    br
+    br
+    - each user in sameinterests
+      li
+        a(href='other_user?other=#{user.USERNAME}') #{user.USERNAME}
+      br

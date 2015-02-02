@@ -1,0 +1,10 @@
+extend layout
+
+block left-section
+  p 
+    | &nbsp
+
+block content
+  | Your request is sent. Please wait for trip creator's response.
+  form(method='get', action='/trip')
+    input(type='submit', value='Return')

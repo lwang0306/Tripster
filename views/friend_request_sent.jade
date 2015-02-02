@@ -1,0 +1,29 @@
+// Jade file to specify output new friend searching result
+// Inherits from layout
+extend layout
+block left-section
+  p
+    | &nbsp
+block content
+  p
+    | #{message}
+
+    if hadRequestFromTarget
+      form(method='get', action='/accept_friend_req')
+        button(type='submit', name='requester', value='#{requester}') Accept
+        br
+        br
+      form(method='get', action='/deny_friend_req')
+        button(type='submit', name='requester', value='#{requester}') Decline
+
+    if alreadyFriends
+      p
+        a(href='/other_user?other=#{friend}') #{friend}
+
+    br   
+    form(method='get', action='/homepage')
+      input(type='submit', value='Back to Homepage')
+
+    br
+    form(method='get', action='/my_friends')
+      input(type='submit', value='My Friends')
